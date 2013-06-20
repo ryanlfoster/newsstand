@@ -7,18 +7,45 @@
 //
 
 #import "AppDelegate.h"
+#import "HomeViewController.h"
+#import "SearchViewController.h"
+#import "FavoriteViewController.h"
+#import "Globals.h"
 
 @implementation AppDelegate
+@synthesize homeNC = _homeNC;
+@synthesize searchNC = _searchNC;
+@synthesize favoriteNC = _favoriteNC;
+@synthesize tabbarController = _tabbarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    [self setupMenu];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;
 }
 
+- (void)setupMenu
+{
+    HomeViewController *homeViewController = [[HomeViewController alloc] init];
+    _homeNC = [[UINavigationController alloc] initWithRootViewController:homeViewController];
+    _homeNC.tabBarItem.title = HOME_TAB_TITLE;
+    
+    SearchViewController *searchViewController = [[SearchViewController alloc] init];
+    _searchNC = [[UINavigationController alloc] initWithRootViewController:searchViewController];
+    _searchNC.tabBarItem.title = SEARCH_TAB_TITLE;
+    
+    FavoriteViewController *favoriteViewController = [[FavoriteViewController alloc] init];
+    _favoriteNC = [[UINavigationController alloc] initWithRootViewController:favoriteViewController];
+    _favoriteNC.tabBarItem.title = FAVORITE_TAB_TITLE;
+    
+    _tabbarController = [[UITabBarController alloc] init];
+    _tabbarController.viewControllers = [NSArray arrayWithObjects:_homeNC,_searchNC, _favoriteNC, nil];
+    self.window.rootViewController = _tabbarController;
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

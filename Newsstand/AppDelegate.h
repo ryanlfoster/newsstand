@@ -11,5 +11,8 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
+@property (retain, nonatomic) UINavigationController *homeNC;
+@property (retain, nonatomic) UINavigationController *searchNC;
+@property (retain, nonatomic) UINavigationController *favoriteNC;
+@property (retain, nonatomic) UITabBarController *tabbarController;
 @end
